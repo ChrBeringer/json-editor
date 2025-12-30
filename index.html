@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Builder Pro - Fixed & Final</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="sidebar">
+    <div>
+        <h2 style="margin:0 0 15px 0">Steuerung</h2>
+        <div class="switch-container">
+            <span>Dark Mode</span>
+            <label class="switch">
+                <input type="checkbox" id="modeToggle" onchange="toggleDarkMode()" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div style="margin-top: 15px;">
+            <label style="font-size: 0.8em; margin-bottom: 5px; display: block;">Farbschema:</label>
+            <select id="schemeSelect" onchange="changeScheme(this.value)">
+                <option value="default">Standard (Farbe)</option>
+                <option value="pastel">Pastell</option>
+                <option value="outline">Nur Konturen</option>
+                <option value="highcontrast">High Contrast</option>
+            </select>
+        </div>
+    </div>
+
+    <hr class="divider">
+    
+    <div class="tiles-container">
+        <h3 style="margin:0">Bausteine</h3>
+        <div class="tile t-obj" draggable="true" ondragstart="onDragStart(event, 'object', true)">{ } Object</div>
+        <div class="tile t-arr" draggable="true" ondragstart="onDragStart(event, 'array', true)">[ ] Array</div>
+        <div class="tile t-str" draggable="true" ondragstart="onDragStart(event, 'string', true)">" " String</div>
+        <div class="tile t-num" draggable="true" ondragstart="onDragStart(event, 'number', true)"># Number</div>
+        <div class="tile t-bool" draggable="true" ondragstart="onDragStart(event, 'boolean', true)">T/F Boolean</div>
+    </div>
+
+    <hr class="divider">
+
+    <div style="display:flex; flex-direction:column; gap:8px;">
+        <button onclick="downloadJSON()">Export JSON</button>
+        <button style="background: #64748b" onclick="document.getElementById('importFile').click()">Import JSON</button>
+        <input type="file" id="importFile" style="display:none" accept=".json" onchange="handleImport(event)">
+        <button onclick="clearAll()" style="background:#991b1b;">Reset</button>
+    </div>
+    
+    <pre id="preview">{}</pre>
+</div>
+
+<div id="main">
+    <div id="canvas" class="canvas" ondrop="onDrop(event, 'root')" ondragover="allowDrop(event)"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
